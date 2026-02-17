@@ -11,42 +11,47 @@ import MyPosts from "./pages/MyPosts";
 
 function Navbar({ user, onLogout }) {
   return (
-    <nav className="bg-indigo-600 text-white shadow-lg">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold tracking-wide">
-          MiniSocial
+    <nav className="navbar-glass sticky top-0 z-50">
+      <div className="max-w-5xl mx-auto px-6 py-3.5 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md group-hover:shadow-lg transition-shadow">
+            M
+          </div>
+          <span className="text-lg font-bold gradient-text tracking-tight">
+            MiniSocial
+          </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1">
           {user ? (
             <>
-              <Link to="/" className="hover:text-indigo-200 transition">
+              <Link to="/" className="px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                 Feed
               </Link>
-              <Link to="/create-post" className="hover:text-indigo-200 transition">
+              <Link to="/create-post" className="px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                 New Post
               </Link>
-              <Link to="/my-posts" className="hover:text-indigo-200 transition">
+              <Link to="/my-posts" className="px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                 My Posts
               </Link>
-              <Link to={`/profile/${user._id}`} className="hover:text-indigo-200 transition">
+              <Link to={`/profile/${user._id}`} className="px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                 Profile
               </Link>
               <button
                 onClick={onLogout}
-                className="bg-white text-indigo-600 px-3 py-1 rounded-md text-sm font-medium hover:bg-indigo-100 transition"
+                className="ml-2 btn-gradient px-4 py-2 rounded-xl text-sm font-semibold"
               >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="hover:text-indigo-200 transition">
+              <Link to="/login" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                 Login
               </Link>
               <Link
                 to="/register"
-                className="bg-white text-indigo-600 px-3 py-1 rounded-md text-sm font-medium hover:bg-indigo-100 transition"
+                className="ml-1 btn-gradient px-5 py-2 rounded-xl text-sm font-semibold"
               >
                 Register
               </Link>
@@ -93,7 +98,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         <Navbar user={user} onLogout={handleLogout} />
         <main className="max-w-3xl mx-auto px-4 py-8">
           <Routes>
