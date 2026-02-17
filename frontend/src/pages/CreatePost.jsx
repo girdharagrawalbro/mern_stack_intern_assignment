@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../api/axios";
+import API, { API_BASE_URL } from "../api/axios";
 
 function CreatePost() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function CreatePost() {
     setLoading(true);
 
     try {
-      await API.post("/posts", formData);
+      await API.post(`${API_BASE_URL}/posts`, formData);
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to create post");

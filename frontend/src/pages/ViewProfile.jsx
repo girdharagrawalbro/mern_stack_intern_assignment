@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import API from "../api/axios";
+import API, { API_BASE_URL } from "../api/axios";
 
 function ViewProfile({ currentUser }) {
   const { id } = useParams();
@@ -14,8 +14,8 @@ function ViewProfile({ currentUser }) {
     const fetchData = async () => {
       try {
         const [userRes, postsRes] = await Promise.all([
-          API.get(`/users/profile/${id}`),
-          API.get("/posts"),
+          API.get(`${API_BASE_URL}/users/profile/${id}`),
+          API.get(`${API_BASE_URL}/posts`),
         ]);
         setUser(userRes.data);
         setPosts(postsRes.data.filter((p) => p.author?._id === id));
@@ -31,7 +31,7 @@ function ViewProfile({ currentUser }) {
   const handleDelete = async (postId) => {
     if (!window.confirm("Delete this post?")) return;
     try {
-      await API.delete(`/posts/${postId}`);
+      await API.delete(`${API_BASE_URL}/posts/${postId}`);
       setPosts(posts.filter((p) => p._id !== postId));
     } catch (err) {
       alert(err.response?.data?.message || "Failed to delete post");

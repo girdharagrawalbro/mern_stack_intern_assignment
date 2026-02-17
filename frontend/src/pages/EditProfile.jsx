@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../api/axios";
+import API, { API_BASE_URL } from "../api/axios";
 
 function EditProfile({ user, onUpdate }) {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function EditProfile({ user, onUpdate }) {
     setLoading(true);
 
     try {
-      const { data } = await API.put("/users/profile", formData);
+      const { data } = await API.put(`${API_BASE_URL}/users/profile`, formData);
       onUpdate(data);
       navigate(`/profile/${user._id}`);
     } catch (err) {

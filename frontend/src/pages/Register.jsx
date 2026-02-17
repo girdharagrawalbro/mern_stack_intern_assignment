@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import API from "../api/axios";
+import API, { API_BASE_URL } from "../api/axios";
 
 function Register({ onLogin }) {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Register({ onLogin }) {
     setLoading(true);
 
     try {
-      const { data } = await API.post("/auth/register", formData);
+      const { data } = await API.post(`${API_BASE_URL}/auth/register`, formData);
       onLogin(data);
       navigate("/");
     } catch (err) {

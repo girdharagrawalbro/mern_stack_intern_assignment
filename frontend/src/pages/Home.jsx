@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import API from "../api/axios";
+import API, { API_BASE_URL } from "../api/axios";
 
 function Home({ user }) {
   const [posts, setPosts] = useState([]);
@@ -12,7 +12,7 @@ function Home({ user }) {
 
   const fetchPosts = async () => {
     try {
-      const { data } = await API.get("/posts");
+      const { data } = await API.get(`${API_BASE_URL}/posts`);
       setPosts(data);
     } catch (err) {
       console.error("Failed to fetch posts:", err);
@@ -24,7 +24,7 @@ function Home({ user }) {
   const handleDelete = async (postId) => {
     if (!window.confirm("Delete this post?")) return;
     try {
-      await API.delete(`/posts/${postId}`);
+      await API.delete(`${API_BASE_URL}/posts/${postId}`);
       setPosts(posts.filter((p) => p._id !== postId));
     } catch (err) {
       alert(err.response?.data?.message || "Failed to delete post");
